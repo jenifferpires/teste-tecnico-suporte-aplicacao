@@ -3,8 +3,6 @@
 
 ## 📜 3) `round-3-sql/queries.sql`
 
-**Copiar e colar no arquivo `round-3-sql/queries.sql`:**
-
 ```sql
 /* 1) Empresas ativas em 20 de Abril */
 SELECT DISTINCT e.nome
