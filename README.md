@@ -39,53 +39,107 @@ tecnicamente justificadas.
 
 ---
 
-### 📘 Round IV – Conceitos (Python e HTTP)
+🔹🐍 Round IV – Conceitos Técnicos (Python, HTTP e Integração).
 
 Este round aborda conceitos fundamentais utilizados no dia a dia de suporte a aplicações e análise de sistemas, com foco em lógica, organização de código e comunicação entre sistemas.
 
----
+1️⃣ Explicação do código Python
 
-## 🐍 Python – Lógica e Otimização
+O código em Python foi desenvolvido para identificar itens agendados que ainda não foram enviados, um cenário comum em rotinas de integração, mensageria e processamento assíncrono.
 
-### Problema proposto
-Identificar quais itens foram agendados, mas ainda não foram enviados, a partir de duas estruturas de dados:
-- Um dicionário de itens agendados
-- Uma lista de identificadores já enviados
+A função principal recebe:
 
-### Solução adotada
-Foi implementada uma função em Python que:
-- Percorre os itens agendados
-- Verifica quais IDs não estão presentes na lista de enviados
-- Retorna apenas os itens pendentes
+agendados: um dicionário onde a chave é o ID e o valor é o item agendado
 
-Para melhorar a performance, a lista de enviados é convertida em um `set`, reduzindo o custo de verificação de existência.
+enviados: uma lista contendo os IDs que já foram processados/enviados
 
-### Estrutura dos arquivos
-`round-4-conceitos/python`
-`funcoes.py # Função principal`
-`teste_pratico.py # Execução e validação`
+A lógica consiste em:
+
+Converter a lista de enviados em um set, otimizando a verificação de existência (O(1));
+Percorrer os itens agendados;
+Retornar apenas os itens cujo ID não está presente na lista de enviados.
+
+Esse tipo de lógica é muito comum em sistemas de:
+
+filas
+sincronização entre sistemas
+reprocessamento de dados
+integrações entre APIs
 
 
+2️⃣ Estrutura do código Python
 
-### Exemplo de execução
-```bash
-python teste_pratico.py
-```
-Saída esperada
-```bash
-['Nota Fiscal']
-```
+`round-4-conceitos/python/`
 
-### Conceitos aplicados
-Funções
-Dicionários e listas
-Estrutura set para otimização
+`funcoes.py      #Contém a função encontrar_nao_enviados`
 
-List comprehension
+`teste_pratico.py  #Script de execução e validação`
 
-Organização de código em módulos
+`http_request_exemplo.py  #Exemplo de request HTTP usando Python`
 
-Boas práticas de execução (if __name__ == "__main__")
+
+O código foi separado em módulos para facilitar:
+
+reutilização
+manutenção
+testes
+leitura por outros desenvolvedores
+
+
+3️⃣ Papel da biblioteca requests
+
+A biblioteca requests é amplamente utilizada em Python para realizar chamadas HTTP de forma simples e legível.
+
+Ela é muito comum em rotinas de:
+
+consumo de APIs
+integrações entre sistemas
+automações
+suporte técnico (testes de endpoints, validações manuais)
+
+
+4️⃣ Exemplo prático de request HTTP com Python
+import requests
+
+url = "https://api.exemplo.com/clientes/123"
+
+headers = {
+    "Authorization": "Bearer token_exemplo",
+    "Content-Type": "application/json"
+}
+
+payload = {
+    "nome": "Empresa Exemplo",
+    "email": "contato@exemplo.com",
+    "ativo": True
+}
+
+response = requests.put(url, json=payload, headers=headers)
+
+if response.status_code == 200:
+    print("Cliente atualizado com sucesso")
+else:
+    print(f"Erro ao atualizar cliente: {response.status_code}")
+
+
+🔎 O que acontece nesse exemplo:
+
+PUT: método HTTP utilizado para atualização de recursos
+HTTPS: garante comunicação segura
+headers: contém autenticação e tipo de conteúdo
+payload: dados enviados para atualização
+status_code: usado para validação do retorno da API
+
+
+5️⃣ Relação com suporte e integração de sistemas
+
+Esses conceitos são essenciais para rotinas de suporte técnico e sustentação, pois permitem:
+
+Diagnosticar falhas de integração entre sistemas
+Testar endpoints manualmente
+Validar payloads enviados e recebidos
+Simular chamadas feitas por aplicações frontend ou mobile
+Apoiar times de desenvolvimento na identificação de erros
 
 ## 📫 Autor
 
