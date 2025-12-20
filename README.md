@@ -56,14 +56,19 @@ enviados: uma lista contendo os IDs que já foram processados/enviados
 A lógica consiste em:
 
 Converter a lista de enviados em um set, otimizando a verificação de existência (O(1));
+
 Percorrer os itens agendados;
+
 Retornar apenas os itens cujo ID não está presente na lista de enviados.
+
 
 Esse tipo de lógica é muito comum em sistemas de:
 
 filas
 sincronização entre sistemas
+
 reprocessamento de dados
+
 integrações entre APIs
 
 
@@ -81,8 +86,11 @@ integrações entre APIs
 O código foi separado em módulos para facilitar:
 
 reutilização
+
 manutenção
+
 testes
+
 leitura por outros desenvolvedores
 
 
@@ -93,9 +101,13 @@ A biblioteca requests é amplamente utilizada em Python para realizar chamadas H
 Ela é muito comum em rotinas de:
 
 consumo de APIs
+
 integrações entre sistemas
+
 automações
-suporte técnico (testes de endpoints, validações manuais)
+
+suporte técnico (testes de endpoints, validações manuais).
+
 
 
 4️⃣ Exemplo prático de request HTTP com Python
@@ -104,21 +116,26 @@ import requests
 url = "https://api.exemplo.com/clientes/123"
 
 headers = {
+
     "Authorization": "Bearer token_exemplo",
     "Content-Type": "application/json"
 }
 
 payload = {
+
     "nome": "Empresa Exemplo",
     "email": "contato@exemplo.com",
     "ativo": True
 }
 
-response = requests.put(url, json=payload, headers=headers)
+response = requests.put(url, json=payload, 
+headers=headers)
 
 if response.status_code == 200:
+
     print("Cliente atualizado com sucesso")
 else:
+
     print(f"Erro ao atualizar cliente: {response.status_code}")
 
 
